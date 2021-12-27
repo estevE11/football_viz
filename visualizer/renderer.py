@@ -44,7 +44,7 @@ class Renderer():
         for i, id in enumerate(self.team_positions):
             self.render_team_pos(id, self.team_positions[id]['pos'])
     
-        self.render_text("Match day " + str(self.matchday+1), (10, 10))
+        self.render_text("Match day " + str(self.matchday+1), (10, 10), color=(200, 200, 200))
     
     def update(self):
         if not self.running: return
@@ -92,7 +92,8 @@ class Renderer():
     def render_team_pos(self, id, pos):
         pygame.draw.circle(self.screen, (0, 0, 0), (pos[0]+3, pos[1]), 12)
         pygame.draw.circle(self.screen, teams[int(id)]['color'], (pos[0]+3, pos[1]), 7)
-        self.render_text(teams[int(id)]['short'], (pos[0]+22, pos[1]-9))
+        self.render_text(teams[int(id)]['short'],
+                         (pos[0]+22, pos[1]-9), color=(200, 200, 200))
 
     def render_team(self, id, points, pos, gd):
         pos = self.convertCoords((points, 35*pos + 20))
