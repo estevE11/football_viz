@@ -7,9 +7,9 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Football Visualizer")
 pygame.font.init() # you have to call this at the start, 
                    # if you want to use this module.
-renderer = Renderer(screen, padding=(10, 40, 10, 10))
 
 history = json.loads(open("pts_history.json", "r").read())
+renderer = Renderer(screen, history, padding=(10, 40, 10, 10))
 
 matchday = 0
 
@@ -28,8 +28,8 @@ while running:
 
     screen.fill((72, 73, 77))
 
+    renderer.update()
     renderer.renderChart(history[matchday])
-    renderer.render_text(str(matchday), (10, 10))
 
     pygame.display.flip()
 
