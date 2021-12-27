@@ -2,7 +2,7 @@ import sys, pygame, json, glob, os
 from renderer import Renderer
 
 pygame.init()
-size = 800, 800
+size = 800, 740
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Football Visualizer")
 pygame.font.init() # you have to call this at the start, 

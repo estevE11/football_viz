@@ -25,7 +25,16 @@ class Renderer():
 
         self.GRID_COLOR = (100, 100, 104)
 
-    def renderChart(self, team_points, lines_at=10):
+    def renderChart(self, team_points, lines_at=10):        
+        pygame.draw.rect(self.screen, (72, 73, 93), (0, 35, 800, 146))
+        pygame.draw.rect(self.screen, (94, 74, 67), (0, 146+35, 800, 35))
+        pygame.draw.rect(self.screen, (67, 71, 59), (0, 217, 800, 35))
+        pygame.draw.rect(self.screen, (94, 64, 67), (0, 636, 800, 35*3))
+
+        for i in range(11):
+            if i % 2 != 0:
+                pygame.draw.rect(self.screen, (70, 70, 73), (0, 250 + i*35, 800, 35))
+
         lines = self.chartMaxVal/lines_at
         for i in range(int(lines)+1):
             pos = self.convertCoords((i*lines_at, 0))
@@ -83,7 +92,7 @@ class Renderer():
     def render_team_pos(self, id, pos):
         pygame.draw.circle(self.screen, (0, 0, 0), (pos[0]+3, pos[1]), 12)
         pygame.draw.circle(self.screen, teams[int(id)]['color'], (pos[0]+3, pos[1]), 7)
-        self.render_text(teams[int(id)]['short'], (pos[0]+22, pos[1]-11))
+        self.render_text(teams[int(id)]['short'], (pos[0]+22, pos[1]-9))
 
     def render_team(self, id, points, pos, gd):
         pos = self.convertCoords((points, 35*pos + 20))
