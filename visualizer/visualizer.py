@@ -24,8 +24,7 @@ while running:
                 if matchday < 0: matchday = 0
             if pygame.key.get_pressed()[pygame.K_RIGHT]:
                 matchday += 1
-                if matchday >= len(history): matchday = len(history)-1
-
+                if matchday >= len(history): matchday = len(history)-1 
     screen.fill((72, 73, 77))
 
     renderer.update()

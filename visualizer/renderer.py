@@ -23,6 +23,8 @@ class Renderer():
 
         self.running = True
 
+        self.font = pygame.font.SysFont("Arial", 30)
+
         self.GRID_COLOR = (100, 100, 104)
 
     def renderChart(self, team_points, lines_at=10):        
@@ -88,12 +90,15 @@ class Renderer():
             self.team_positions[id]['pos'] = [pos[0], pos[1]]
 
 
-
+    # TODO: show points at the end
     def render_team_pos(self, id, pos):
         pygame.draw.circle(self.screen, (0, 0, 0), (pos[0]+3, pos[1]), 12)
         pygame.draw.circle(self.screen, teams[int(id)]['color'], (pos[0]+3, pos[1]), 7)
         self.render_text(teams[int(id)]['short'],
                          (pos[0]+22, pos[1]-9), color=(200, 200, 200))
+        if not self.running:
+            points = self.history[self.matchday-1][str(id)]['pts']
+            self.render_text(str(points), (pos[0]-self.font.size(str(points))[0]-16, pos[1]-9), color=(200, 200, 200))
 
     def render_team(self, id, points, pos, gd):
         pos = self.convertCoords((points, 35*pos + 20))
@@ -106,8 +111,8 @@ class Renderer():
         return (pos[0]*self.w/self.chartMaxVal) + self.padding[0], pos[1] + self.padding[1]
 
     def render_text(self, text, pos, color=(0, 0, 0), font="Arial Bold", size=30):
-        myfont = pygame.font.SysFont(font, size)
-        textsurface = myfont.render(text, False, color)
+        self.font = pygame.font.SysFont(font, size)
+        textsurface = self.font.render(text, False, color)
         self.screen.blit(textsurface, pos)
     
     def sort_teams(self, team_points):
